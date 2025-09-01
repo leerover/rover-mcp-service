@@ -1,9 +1,15 @@
 server:
-  port: 8082
+  port: 8090
 
-  spring:
+spring:
+  application:
+    name: mcp-server
+  main:
+    banner-mode: off
     ai:
       mcp:
         server:
           name: mcp-server
-          sse-message-endpoint: /mcp/rover
+          version: 1.0.0
+          type: SYNC
+          see-message-endpoint: /mcp/message
