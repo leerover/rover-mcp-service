@@ -15,21 +15,20 @@ public class PaymentConfigService {
                                             @ToolParam(description = "交易方式，例如：银行卡支付、微信支付")String transWay,
                                             @ToolParam(description = "支付方式，例如：H5,API")String payWay,
                                             @ToolParam(description = "交易主体，例如：众联商务、众先安行")String transSubject){
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("businessScene=");
-        stringBuilder.append(businessScene);
-        stringBuilder.append(";transMode=");
-        stringBuilder.append(transMode);
-        stringBuilder.append(";fundType=");
-        stringBuilder.append(fundType);
-        stringBuilder.append(";payType=");
-        stringBuilder.append(payType);
-        stringBuilder.append(";transWay=");
-        stringBuilder.append(transWay);
-        stringBuilder.append(";payWay=");
-        stringBuilder.append(payWay);
-        stringBuilder.append(";transSubject=");
-        stringBuilder.append(transSubject);
+       StringBuilder stringBuilder = new StringBuilder();
+       if(!"正常还款".equals(businessScene) && !"逾期还款".equals(businessScene)){
+           stringBuilder.append("不支持的业务场景");
+       }
+       if(!"收银台".equals(transMode) && !"非收银台".equals(transMode)){
+           stringBuilder.append("不支持的交易模式");
+       }
+       if(!"H5".equals(payWay) && !"API".equals(payWay)){
+            stringBuilder.append("不支持的支付方式");
+       }
+       if (!"银行卡支付".equals(transWay) && !"微信支付".equals(transWay) && !"支付宝支付".equals(transWay)) {
+           stringBuilder.append("不支持的交易方式");
+       }
+       stringBuilder.append("交易参数校验通过");
         return stringBuilder.toString();
     }
 }

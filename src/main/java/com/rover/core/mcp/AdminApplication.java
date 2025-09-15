@@ -2,6 +2,7 @@ package com.rover.core.mcp;
 
 import com.rover.core.mcp.service.BIService;
 import com.rover.core.mcp.service.PaymentConfigService;
+import com.rover.core.mcp.service.WeatherService;
 import org.springframework.ai.tool.ToolCallbackProvider;
 import org.springframework.ai.tool.method.MethodToolCallbackProvider;
 import org.springframework.boot.SpringApplication;
@@ -26,5 +27,10 @@ public class AdminApplication {
         return MethodToolCallbackProvider.builder()
                 .toolObjects(paymentConfigService)
                 .build();
+    }
+
+    @Bean
+    public ToolCallbackProvider weatherTools(WeatherService weatherService){
+        return MethodToolCallbackProvider.builder().toolObjects(weatherService).build();
     }
 }
